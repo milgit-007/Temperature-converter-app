@@ -23,16 +23,16 @@ const swapUnits = () => {
 	}
 };
 
-const convertCelsiusToFahrenheit = () => {
-	const fahrenheit = (converterInput.value * 1.8 + 32).toFixed(1);
-	resultInfo.textContent = `${converterInput.value}${unitCelsius} to ${fahrenheit}${unitFahrenheit}`;
+const convertCelsiusToFahrenheit = (temperatureInCelsius) => {
+	const fahrenheit = (temperatureInCelsius * 1.8 + 32).toFixed(1);
+	resultInfo.textContent = `${temperatureInCelsius}${unitCelsius} to ${fahrenheit}${unitFahrenheit}`;
 	converterInput.value = '';
 	errorInfo.style.display = 'none';
 };
 
-const convertFahrenheitToCelsius = () => {
-	const celsius = ((converterInput.value - 32) / 1.8).toFixed(1);
-	resultInfo.textContent = `${converterInput.value}${unitFahrenheit} to ${celsius}${unitCelsius}`;
+const convertFahrenheitToCelsius = (temperatureInFahrenheit) => {
+	const celsius = ((temperatureInFahrenheit - 32) / 1.8).toFixed(1);
+	resultInfo.textContent = `${temperatureInFahrenheit}${unitFahrenheit} to ${celsius}${unitCelsius}`;
 	converterInput.value = '';
 	errorInfo.style.display = 'none';
 };
@@ -40,9 +40,9 @@ const convertFahrenheitToCelsius = () => {
 const convertTemperature = () => {
 	if (converterInput.value !== '') {
 		if (spanFirst.textContent === unitCelsius) {
-			convertCelsiusToFahrenheit();
+			convertCelsiusToFahrenheit(converterInput.value);
 		} else {
-			convertFahrenheitToCelsius();
+			convertFahrenheitToCelsius(converterInput.value);
 		}
 	} else {
 		resultInfo.textContent = '';
@@ -67,4 +67,3 @@ converterBtn.addEventListener('click', convertTemperature);
 swapBtn.addEventListener('click', swapUnits);
 resetBtn.addEventListener('click', resetValues);
 converterInput.addEventListener('keydown', () => (resultInfo.textContent = ''));
-converterInput.addEventListener('keyup', useEnterKey);
