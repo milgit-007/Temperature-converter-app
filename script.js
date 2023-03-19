@@ -1,59 +1,70 @@
-const converterValue = document.querySelector('#converter');
+const converterInput = document.querySelector('#converter');
 const converterBtn = document.querySelector('.converter-btn');
 const resetBtn = document.querySelector('.reset-btn');
-const changeBtn = document.querySelector('.change-btn');
+const swapBtn = document.querySelector('.change-btn');
 const resultInfo = document.querySelector('.result');
-const spanCelsius = document.querySelector('.one');
-const spanFahrenheit = document.querySelector('.two');
+const errorInfo = document.querySelector('.error-message');
+const spanFirst = document.querySelector('.one');
+const spanSecond = document.querySelector('.two');
+const unitCelsius = '°C';
+const unitFahrenheit = '°F';
 
 const swapUnits = () => {
-	if (spanCelsius.textContent === '°C') {
-		spanCelsius.textContent = '°F';
-		spanFahrenheit.textContent = '°C';
+	if (spanFirst.textContent === unitCelsius) {
+		spanFirst.textContent = unitFahrenheit;
+		spanSecond.textContent = unitCelsius;
 		resultInfo.textContent = '';
-		converterValue.value = '';
+		converterInput.value = '';
 	} else {
-		spanCelsius.textContent = '°C';
-		spanFahrenheit.textContent = '°F';
+		spanFirst.textContent = unitCelsius;
+		spanSecond.textContent = unitFahrenheit;
 		resultInfo.textContent = '';
-		converterValue.value = '';
+		converterInput.value = '';
 	}
 };
 
-const changeFahrToCel = () => {
-	const fahrenheit = (converterValue.value * 1.8 + 32).toFixed(1);
-	resultInfo.textContent = `${converterValue.value}°C to ${fahrenheit}°F`;
-	resultInfo.style = '';
-	converterValue.value = '';
+const convertCelsiusToFahrenheit = () => {
+	const fahrenheit = (converterInput.value * 1.8 + 32).toFixed(1);
+	resultInfo.textContent = `${converterInput.value}${unitCelsius} to ${fahrenheit}${unitFahrenheit}`;
+	converterInput.value = '';
+	errorInfo.style.display = 'none';
 };
 
-const changeCelToFahr = () => {
-	const celsius = ((converterValue.value - 32) / 1.8).toFixed(1);
-	resultInfo.textContent = `${converterValue.value}°F to ${celsius}°C`;
-	resultInfo.style = '';
-	converterValue.value = '';
+const convertFahrenheitToCelsius = () => {
+	const celsius = ((converterInput.value - 32) / 1.8).toFixed(1);
+	resultInfo.textContent = `${converterInput.value}${unitFahrenheit} to ${celsius}${unitCelsius}`;
+	converterInput.value = '';
+	errorInfo.style.display = 'none';
 };
 
-const temperatureConversion = () => {
-	if (converterValue.value !== '') {
-		if (spanCelsius.textContent === '°C') {
-			changeFahrToCel();
+const convertTemperature = () => {
+	if (converterInput.value !== '') {
+		if (spanFirst.textContent === unitCelsius) {
+			convertCelsiusToFahrenheit();
 		} else {
-			changeCelToFahr();
+			convertFahrenheitToCelsius();
 		}
 	} else {
-		resultInfo.textContent = 'Musisz podać jakąś wartość!';
-		resultInfo.style.color = 'darkred';
-        resultInfo.style.fontSize = '16px'
+		resultInfo.textContent = '';
+		errorInfo.style.display = 'block';
 	}
 };
 
-const resetValue = () => {
-	converterValue.value = '';
+const resetValues = () => {
+	converterInput.value = '';
 	resultInfo.textContent = '';
+	errorInfo.style.display = 'none';
 };
 
-converterBtn.addEventListener('click', temperatureConversion);
-changeBtn.addEventListener('click', swapUnits);
-resetBtn.addEventListener('click', resetValue);
-converterValue.addEventListener('keydown', () => (resultInfo.textContent = ''));
+const useEnterKey = e => {
+	if (e.key === 'Enter') {
+		convertTemperature();
+	}
+};
+
+
+converterBtn.addEventListener('click', convertTemperature);
+swapBtn.addEventListener('click', swapUnits);
+resetBtn.addEventListener('click', resetValues);
+converterInput.addEventListener('keydown', () => (resultInfo.textContent = ''));
+converterInput.addEventListener('keyup', useEnterKey);

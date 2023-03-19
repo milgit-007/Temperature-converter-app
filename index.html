@@ -15,8 +15,9 @@
 	<div class="wrapper">
 		<div class="top">
 			<label for="converter">Konwerter <span class="one">°C</span> na <span class="two">°F</span></label>
-			<input type="number" id="converter" placeholder="Wpisz liczbę...">
-			<p class="result"></p>
+			<input type="number" id="converter" placeholder="Wpisz liczbę..." min="-500" max="500">
+			<p class="info error-message">Musisz podać jakąś wartość!</p>
+			<p class="info result"></p>
 		</div>
 
 		<div class="bottom">

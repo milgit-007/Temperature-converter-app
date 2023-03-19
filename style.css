@@ -9,29 +9,36 @@ body {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	position: relative;
 	height: 100vh;
 	background-color: rgb(44, 53, 50);
 	font-family: 'Open Sans', sans-serif;
 	color: #fff;
 	font-size: 18px;
+	text-align: center;
 }
 
 .wrapper {
 	width: 100%;
 	max-width: 800px;
-	padding: 20px 20px;
+	padding: 20px;
 	background-color: rgba(0, 0, 0, 0.5);
 	border-radius: 25px;
 }
 
+.info {
+	margin: 15px 0;
+}
+
 .result {
-	margin-bottom: 15px;
-	margin-top: 15px;
 	font-size: 20px;
-	color: hsl(181deg 73% 23%);
 	font-weight: bold;
-	text-align: center;
+	color: hsl(183, 29%, 47%);
+}
+
+.error-message {
+	display: none;
+	color: tomato;
+	font-size: 16px;
 }
 
 label {
@@ -79,6 +86,10 @@ button:hover {
 		font-size: 30px;
 	}
 
+	.error-message {
+		font-size: 18px;
+	}
+
 	label {
 		font-size: 44px;
 	}
@@ -91,11 +102,11 @@ button:hover {
 	.bottom {
 		text-align: center;
 	}
-	
+
 	button {
+		display: inline;
 		padding: 20px 30px;
 		margin: 20px 10px;
 		font-size: 18px;
-		display: inline;
 	}
 }
